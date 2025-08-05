@@ -9,7 +9,7 @@
   <!-- svelte-ignore a11y_click_events_have_key_events -->
   <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
   <img
-    src="/x.png"
+    src="/tourney/x.png"
     class="remove_btn"
     alt=""
     on:click={() => remove_player(player.image_url)}

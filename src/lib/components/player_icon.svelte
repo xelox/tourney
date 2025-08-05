@@ -7,7 +7,10 @@
 
 <main>
   <p>{player?.tag ?? "TBC"}</p>
-  <div style={`background-image: url(${player?.image_url});`}></div>
+  <div
+    style="background-image: url({player?.image_url ??
+      '/tourney/placeholder.png'});"
+  ></div>
 </main>
 
 <style>
