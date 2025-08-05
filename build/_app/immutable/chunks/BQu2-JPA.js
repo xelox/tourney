@@ -1,0 +1,1 @@
+import"./DsnmJJEf.js";import"./ByTUjnXn.js";import{b as r,a as t}from"./CVDsBalB.js";var a=r('<footer class="svelte-16ofoeu"><a href="tourney" class="svelte-16ofoeu">/Tourney</a> <a href="configure" class="svelte-16ofoeu">/Configure</a></footer>');function l(o){var e=a();t(o,e)}export{l as F};

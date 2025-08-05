@@ -67,7 +67,7 @@
     on:dragover|preventDefault
   />
 
-  <h2>Partecipants:</h2>
+  <h2>Participants:</h2>
   <div
     style="grid-template-columns: repeat({player_columns}, 1fr)"
     class="content_list_wrap"

@@ -11,7 +11,7 @@
 	} from "$lib/constants.js";
 
 	import Branch from "./Branch.svelte";
-	import { type TreeNode } from "$lib/types.js";
+	import { compute_tree_depth, type TreeNode } from "$lib/types.js";
 	import PlayerIcon from "./player_icon.svelte";
 	import { onDestroy, onMount } from "svelte";
 
@@ -123,7 +123,7 @@
 					<Branch
 						current_node={current_node.right}
 						parent_node={current_node}
-						depth={depth - 1}
+						depth={compute_tree_depth(current_node.right)}
 						v_delta={0}
 						is_lower={!should_split || true}
 						is_first_split={should_split}

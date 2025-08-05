@@ -1,30 +1,38 @@
 import { BASE_ICON_H, BASE_V_GAP } from "./constants.js";
 
 export type Player = {
-	player?: undefined,
-	tag: string,
-	image_url: string,
-	image_blob: File,
+	player?: undefined;
+	tag: string;
+	image_url: string;
+	image_blob: File;
 };
 
 export type TreeNode = {
-	left?: TreeNode,
-	right?: TreeNode,
-	w?: Player | TreeNode,
-	id: number,
-}
+	left?: TreeNode;
+	right?: TreeNode;
+	w?: Player | TreeNode;
+	id: number;
+};
 
-export function make_tree(players: Player[]): { root: TreeNode, depth: number, base: number } {
-	console.log('making tree from list:', players);
+export function make_tree(
+	players: Player[],
+): { root: TreeNode; depth: number; base: number } {
+	console.log("making tree from list:", players);
 	let id = 0;
 
-	const next_id = () => { id++; return id; }
+	const next_id = () => {
+		id++;
+		return id;
+	};
 
 	if (players.length == 0) {
 		return { root: { id: 0 }, depth: 1, base: 1 };
 	}
 
-	let nodes: TreeNode[] = players.map(player => ({ w: player, id: next_id() }));
+	let nodes: TreeNode[] = players.map((player) => ({
+		w: player,
+		id: next_id(),
+	}));
 	const nextPowerOfTwo = Math.pow(2, Math.ceil(Math.log2(players.length)));
 	const base = nextPowerOfTwo;
 	while (nodes.length < nextPowerOfTwo) {
@@ -42,7 +50,7 @@ export function make_tree(players: Player[]): { root: TreeNode, depth: number, b
 				left,
 				right,
 				id: next_id(),
-			}
+			};
 			nextRound.push(parent);
 		}
 		nodes = nextRound;
@@ -82,18 +90,24 @@ function pruneTree(node: TreeNode): TreeNode | null {
 		w: node.w,
 		left,
 		right,
-		id: node.id
+		id: node.id,
 	};
 }
 
-export function compute_height(root: TreeNode, depth: number, after_split = false): { top_half: number, bottom_half: number } {
+export function compute_height(
+	root: TreeNode,
+	depth: number,
+	after_split = false,
+): { top_half: number; bottom_half: number } {
 	if (!root.left) return { top_half: 0, bottom_half: 0 };
-	if (depth >= 4 && !after_split) return compute_height(root.left, depth - 1, true);
+	if (depth >= 4 && !after_split) {
+		return compute_height(root.left, depth - 1, true);
+	}
 
 	const initial_gap = Math.pow(2, depth - 1) * BASE_V_GAP;
 	let current_gap = initial_gap;
 
-	let top_half = 0
+	let top_half = 0;
 	let current_left: TreeNode | undefined = root.left;
 	while (current_left) {
 		current_left = current_left.left;
@@ -103,7 +117,7 @@ export function compute_height(root: TreeNode, depth: number, after_split = fals
 
 	current_gap = initial_gap;
 
-	let bottom_half = 0
+	let bottom_half = 0;
 	let current_right = root.right;
 	while (current_right) {
 		current_right = current_right.right;
@@ -112,5 +126,15 @@ export function compute_height(root: TreeNode, depth: number, after_split = fals
 	}
 
 	console.log("computed height:", bottom_half);
-	return { top_half, bottom_half }
+	return { top_half, bottom_half };
+}
+
+export function compute_tree_depth(root: TreeNode): number {
+	let depth = 1;
+	let current = root.left;
+	while (current) {
+		current = current.left;
+		depth += 1;
+	}
+	return depth;
 }

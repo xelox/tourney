@@ -1,5 +1,5 @@
 <footer>
-	<a href="tourny">/Tourny</a>
+	<a href="tourney">/Tourney</a>
 	<a href="configure">/Configure</a>
 </footer>
 

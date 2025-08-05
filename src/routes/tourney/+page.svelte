@@ -13,6 +13,7 @@
     background: black;
     width: 100vw;
     min-height: 100vh;
+    box-sizing: border-box;
     height: max-content;
     padding: 50px 0;
     display: flex;
